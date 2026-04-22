@@ -139,19 +139,19 @@ body {
 .leaf-4 { transform: translateX(-50%) rotate(216deg) scale(0); }
 .leaf-5 { transform: translateX(-50%) rotate(288deg) scale(0); }
 
-/* Bloomed State - Refined for Smoothness */
+/* Bloomed State - Slower & More Magical */
 .bloomed .leaf { 
     opacity: 1; 
     scale: 1; 
-    transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Graceful but energetic */
+    transition: all 3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower 3s transition */
 }
 
-/* Staggered bloom effect for petal smoothness */
-.bloomed .leaf-1 { transform: translateX(-50%) rotate(0deg) translateY(-8px); transition-delay: 0.1s; }
-.bloomed .leaf-2 { transform: translateX(-50%) rotate(72deg) translateY(-8px); transition-delay: 0.2s; }
-.bloomed .leaf-3 { transform: translateX(-50%) rotate(144deg) translateY(-8px); transition-delay: 0.3s; }
-.bloomed .leaf-4 { transform: translateX(-50%) rotate(216deg) translateY(-8px); transition-delay: 0.4s; }
-.bloomed .leaf-5 { transform: translateX(-50%) rotate(288deg) translateY(-8px); transition-delay: 0.5s; }
+/* Increased staggered delays for a slow-motion bloom */
+.bloomed .leaf-1 { transform: translateX(-50%) rotate(0deg) translateY(-8px); transition-delay: 0.2s; }
+.bloomed .leaf-2 { transform: translateX(-50%) rotate(72deg) translateY(-8px); transition-delay: 0.4s; }
+.bloomed .leaf-3 { transform: translateX(-50%) rotate(144deg) translateY(-8px); transition-delay: 0.6s; }
+.bloomed .leaf-4 { transform: translateX(-50%) rotate(216deg) translateY(-8px); transition-delay: 0.8s; }
+.bloomed .leaf-5 { transform: translateX(-50%) rotate(288deg) translateY(-8px); transition-delay: 1s; }
 
 .bloomed .center { transform: translate(-50%, -50%) scale(1.1); transition: all 1s ease 0.8s; }
 
