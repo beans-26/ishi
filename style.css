@@ -1,0 +1,264 @@
+:root {
+    --primary-red: #d1345b; /* More of a painted magenta */
+    --dark-red: #8b0000;
+    --stem-green: #3e6d36;
+    --glow: #ff758c;
+    --bg-color: #0c0c0c;
+    --paper-color: #fdf7e2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Passcode UI (Kept from previous) */
+#passcode-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-color);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 200;
+    transition: opacity 1s ease, visibility 1s;
+}
+
+.lock-vibe h1 { font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+.instruction { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 3rem; text-align: center; }
+.passcode-container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.date-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--primary-red); }
+.pin-display { display: flex; gap: 15px; }
+.pin-digit { width: 50px; height: 70px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; text-align: center; font-size: 2rem; color: white; outline: none; }
+#unlock-btn { margin-top: 1rem; padding: 12px 40px; background: white; color: black; border: none; border-radius: 30px; font-weight: 700; cursor: pointer; }
+#error-msg { color: var(--primary-red); font-size: 0.8rem; opacity: 0; transition: opacity 0.3s; margin-top: 10px; }
+
+/* Main Scene */
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    transition: filter 0.5s ease;
+}
+
+.container.blur { filter: blur(10px); pointer-events: none; }
+
+/* NEW WATERCOLOR FLOWER STYLING */
+.bouquet {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.flower-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform-origin: bottom center;
+}
+
+/* Positioning 3 flowers in a bouquet */
+.flower-wrapper.f1 { transform: translateX(-50%) rotate(-15deg) translateY(-20px); }
+.flower-wrapper.f2 { transform: translateX(-50%) rotate(0deg); }
+.flower-wrapper.f3 { transform: translateX(-50%) rotate(15deg) translateY(-20px); }
+
+.flower {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+}
+
+.leaf {
+    position: absolute;
+    width: 35px;
+    height: 45px;
+    background: radial-gradient(circle at bottom, var(--primary-red), #e67399);
+    /* Watercolor rounded shape */
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    filter: drop-shadow(0 0 5px rgba(209, 52, 91, 0.3));
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    /* Speckled dark center */
+    background: radial-gradient(#1a1a1a 20%, #333 40%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 3;
+    transition: all 0.8s ease 0.5s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.stem {
+    width: 120%;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--stem-green), transparent);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(45% 0, 55% 0, 52% 100%, 48% 100%);
+    z-index: 1;
+}
+
+/* Individual Petal Rotations (5-petal look) */
+.leaf-1 { transform: translateX(-50%) rotate(0deg) scale(0); }
+.leaf-2 { transform: translateX(-50%) rotate(72deg) scale(0); }
+.leaf-3 { transform: translateX(-50%) rotate(144deg) scale(0); }
+.leaf-4 { transform: translateX(-50%) rotate(216deg) scale(0); }
+.leaf-5 { transform: translateX(-50%) rotate(288deg) scale(0); }
+
+/* Bloomed State */
+.bloomed .leaf { opacity: 1; scale: 1; }
+.bloomed .leaf-1 { transform: translateX(-50%) rotate(0deg) translateY(-5px); }
+.bloomed .leaf-2 { transform: translateX(-50%) rotate(72deg) translateY(-5px); }
+.bloomed .leaf-3 { transform: translateX(-50%) rotate(144deg) translateY(-5px); }
+.bloomed .leaf-4 { transform: translateX(-50%) rotate(216deg) translateY(-5px); }
+.bloomed .leaf-5 { transform: translateX(-50%) rotate(288deg) translateY(-5px); }
+.bloomed .center { transform: translate(-50%, -50%) scale(1); }
+
+/* Screen Shake */
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-8px, -8px); }
+    20%, 40%, 60%, 80% { transform: translate(8px, 8px); }
+}
+.shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+
+/* Rest of the UI */
+.message-container { opacity: 0; transform: translateY(20px); pointer-events: none; }
+.message-container.show { opacity: 1; transform: translateY(0); transition: all 1.5s ease 1s; }
+.glow-text { font-family: 'Dancing Script', cursive; font-size: 5rem; text-shadow: 0 0 10px var(--glow), 0 0 40px var(--primary-red); }
+
+.envelope-wrapper { width: 200px; height: 150px; cursor: pointer; margin-top: 20px; position: relative; opacity: 0; transform: translateY(20px); pointer-events: none; }
+.envelope-wrapper.show { opacity: 1; transform: translateY(0); transition: all 1.5s ease 1.8s; pointer-events: all; }
+.envelope { position: relative; width: 100%; height: 100%; background: #f0f0f0; border-radius: 0 0 8px 8px; }
+.flap {
+    position: absolute; top: 0; width: 0; height: 0;
+    border-left: 100px solid transparent; border-right: 100px solid transparent;
+    border-top: 80px solid #e0e0e0; transform-origin: top; transition: transform 0.5s ease; z-index: 4;
+}
+.pocket {
+    position: absolute; bottom: 0; width: 0; height: 0;
+    border-left: 100px solid #f0f0f0; border-right: 100px solid #f0f0f0;
+    border-bottom: 75px solid #dcdcdc; border-radius: 0 0 8px 8px; z-index: 3;
+}
+.letter { position: absolute; bottom: 10px; left: 10px; width: 180px; height: 130px; background: white; padding: 15px; color: #444; font-size: 0.8rem; transition: transform 0.6s ease; z-index: 2; }
+.envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-wrapper.open .letter { transform: translateY(-80px); height: 160px; }
+
+.letter-modal {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+    width: 95%; max-width: 600px; z-index: 1000; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); opacity: 0; pointer-events: none;
+}
+.letter-modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: all; }
+.paper { background: var(--paper-color); padding: 3rem; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); border-radius: 15px; color: #2c3e50; position: relative; border: 1px solid #e8e0c5; }
+.paper-content { position: relative; z-index: 10; }
+.date { text-align: right; font-size: 1rem; font-weight: 700; color: #7f8c8d; margin-bottom: 2rem; }
+.salutation { font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 2.5rem; color: #1a1a1a; }
+.main-text p { font-family: 'Dancing Script', cursive; font-size: 1.4rem; line-height: 2.2rem; margin-bottom: 2rem; color: #34495e; }
+.signature { text-align: right; margin-top: 3rem; }
+.signature p { font-family: 'Dancing Script', cursive; font-size: 1.5rem; }
+.signature .name { font-size: 3rem; font-weight: 700; color: #1a1a1a; }
+.close-btn { position: absolute; top: -50px; right: 0; color: white; font-size: 2.5rem; cursor: pointer; }
+
+#passcode-overlay.hidden { opacity: 0; visibility: hidden; }
+.mini-flower { position: fixed; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1s; }
+.mini-flower.bloomed { opacity: 1; }
+.mini-flower .flower { width: 30px; height: 30px; }
+.mini-flower .leaf { width: 15px; height: 25px; }
+.mini-flower .center { width: 8px; height: 8px; }
+
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 600px) {
+    .lock-vibe h1 {
+        font-size: 2.2rem;
+    }
+
+    .pin-digit {
+        width: 45px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .glow-text {
+        font-size: 3rem;
+    }
+
+    .bouquet {
+        transform: scale(0.7);
+        margin-bottom: 0;
+    }
+
+    .container {
+        gap: 2rem;
+    }
+
+    .paper {
+        padding: 1.5rem;
+    }
+
+    .salutation {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-text p {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .signature .name {
+        font-size: 2rem;
+    }
+
+    .letter-modal {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 15px;
+        color: #333;
+        font-size: 2rem;
+    }
+}
+
+/* Global Background Glow */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(209, 52, 91, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}

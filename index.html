@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Your Eyes Only | Monthsary</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="passcode-overlay">
+        <div class="lock-vibe">
+            <h1>For Your Eyes Only</h1>
+            <p class="instruction">Enter the 4-digit pin</p>
+
+            <div class="passcode-container">
+                <p class="date-label">month/day</p>
+                <div class="pin-display">
+                    <input type="text" maxlength="1" class="pin-digit" id="d1">
+                    <input type="text" maxlength="1" class="pin-digit" id="d2">
+                    <input type="text" maxlength="1" class="pin-digit" id="d3">
+                    <input type="text" maxlength="1" class="pin-digit" id="d4">
+                </div>
+                <button id="unlock-btn">ENTER</button>
+                <div id="error-msg">Gikalimtan na ha..</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- FIXED BACKGROUND FLOWERS (LOCKED FORMATION) -->
+        <div class="background-flowers">
+            <div class="mini-flower" style="top: 10%; left: 15%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 20%; left: 80%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 70%; left: 10%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 80%; left: 85%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 40%; left: 5%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 15%; left: 45%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 85%; left: 40%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 50%; left: 90%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 5%; left: 85%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+            <div class="mini-flower" style="top: 90%; left: 15%;">
+                <div class="flower"><div class="leaf leaf-1"></div><div class="leaf leaf-2"></div><div class="leaf leaf-3"></div><div class="leaf leaf-4"></div><div class="leaf leaf-5"></div><div class="center"></div></div>
+            </div>
+        </div>
+
+        <!-- TOP: The Bouquet -->
+        <div class="bouquet" id="flower-trigger">
+            <div class="flower-wrapper f1">
+                <div class="flower">
+                    <div class="leaf leaf-1"></div>
+                    <div class="leaf leaf-2"></div>
+                    <div class="leaf leaf-3"></div>
+                    <div class="leaf leaf-4"></div>
+                    <div class="leaf leaf-5"></div>
+                    <div class="center"></div>
+                </div>
+                <div class="stem"></div>
+            </div>
+            <div class="flower-wrapper f2">
+                <div class="flower">
+                    <div class="leaf leaf-1"></div>
+                    <div class="leaf leaf-2"></div>
+                    <div class="leaf leaf-3"></div>
+                    <div class="leaf leaf-4"></div>
+                    <div class="leaf leaf-5"></div>
+                    <div class="center"></div>
+                </div>
+                <div class="stem"></div>
+            </div>
+            <div class="flower-wrapper f3">
+                <div class="flower">
+                    <div class="leaf leaf-1"></div>
+                    <div class="leaf leaf-2"></div>
+                    <div class="leaf leaf-3"></div>
+                    <div class="leaf leaf-4"></div>
+                    <div class="leaf leaf-5"></div>
+                    <div class="center"></div>
+                </div>
+                <div class="stem"></div>
+            </div>
+        </div>
+
+        <!-- MIDDLE: The Message -->
+        <div class="message-container" id="message">
+            <h1 class="glow-text">Happy Monthsary, my Ishi!</h1>
+        </div>
+
+        <!-- BOTTOM: The Letter -->
+        <div class="envelope-wrapper" id="envelope-trigger">
+            <div class="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter">
+                    <p>Click this envelope</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPANDED LETTER -->
+    <div class="letter-modal" id="letter-modal">
+        <span class="close-btn" id="close-modal">&times;</span>
+        <div class="paper">
+            <div class="paper-content">
+                <p class="date">APRIL 22, 2026</p>
+                <h2 class="salutation">Dear My Ishi,</h2>
+                <div class="main-text">
+                    <p>Even if the world still calls you my girlfriend, in my heart, you've always been so much more than that. You're my partner, my safe place, my favorite person, and the one I see in my future no matter what life brings.</p>
+                    <p>Every moment spent with you is a treasure I hold close to my heart. You bring so much light and joy into my life, and I am endlessly grateful for your love, your patience, and your presence.</p>
+                </div>
+                <div class="signature">
+                    <p>With love,</p>
+                    <p class="name">Chi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
