@@ -13,15 +13,19 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: var(--bg-color);
     color: white;
     font-family: 'Inter', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /* Passcode UI (Kept from previous) */
@@ -209,20 +213,23 @@ body {
     }
 
     .glow-text {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .bouquet {
-        transform: scale(0.7);
+        transform: scale(0.65);
+        height: 220px;
         margin-bottom: 0;
     }
 
     .container {
-        gap: 2rem;
+        gap: 1.2rem;
+        padding-bottom: 20px;
     }
 
     .paper {
-        padding: 1.5rem;
+        padding: 2rem 1.2rem;
+        width: 92%;
     }
 
     .salutation {
@@ -233,7 +240,7 @@ body {
     .main-text p {
         font-size: 1.1rem;
         line-height: 1.6rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     .signature .name {
